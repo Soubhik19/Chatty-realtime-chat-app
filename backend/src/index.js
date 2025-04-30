@@ -11,10 +11,6 @@ app.use(express.json());
 
 app.use("/api/auth",authRoutes)
 app.use(cookieParser());
-app.get("/ping", (req, res) => {
-    res.send("pong");
-  });
-  
 
 
 app.listen(process.env.PORT || 5001, '0.0.0.0', () => {
