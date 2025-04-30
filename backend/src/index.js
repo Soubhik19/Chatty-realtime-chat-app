@@ -6,11 +6,14 @@ import authRoutes from './routes/auth.routes.js'
 import {connectDB} from './lib/db.js'
 
 dotenv.config()
+
 const app =express();
+// Middleware
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth",authRoutes)
-app.use(cookieParser());
+
 
 
 app.listen(process.env.PORT || 5001, '0.0.0.0', () => {
