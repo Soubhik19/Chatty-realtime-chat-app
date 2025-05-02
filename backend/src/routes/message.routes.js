@@ -7,7 +7,8 @@ import { getMessages, getUsersfromSidebar,sendMessage} from '../controllers/mess
 router.get("/users",protectRoute,getUsersfromSidebar);
 router.get("/:id", protectRoute, getMessages);
 
-router.post("/send:id",protectRoute,sendMessage);
+router.post("/send/:id", protectRoute, sendMessage);
+
 
 
 

@@ -6,16 +6,19 @@ import cors from 'cors'
 import authRoutes from './routes/auth.routes.js'
 import {connectDB} from './lib/db.js'
 import messageRoutes from './routes/message.routes.js'
+import { app ,server} from './lib/socket.js'
 
 dotenv.config()
 
-const app =express();
+app
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:5174'],
     credentials: true,
-}))
-
+  }));
+  
+  app.use(express.json({ limit: '50mb' }));  // Adjust limit as needed
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cookieParser());
 app.use(express.json());
@@ -29,7 +32,7 @@ app.use("/api/messages",messageRoutes)
 
 
 
-app.listen(process.env.PORT || 5001, '0.0.0.0', () => {
+server.listen(process.env.PORT || 5001, '0.0.0.0', () => {
     console.log(`Server is running on port ${process.env.PORT || 5001}`);
     connectDB();
 });
